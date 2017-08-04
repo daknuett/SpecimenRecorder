@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="path">specimenrecorder</string>
+    <string name="image_prefix">images/</string>
+    <string name="document_prefix">documents/</string>
+    <string name="document_postfix">json</string>
+    <string name="settings_filename">settings.json</string>
+    <string name="settings_path">settings/</string>
+</resources>
