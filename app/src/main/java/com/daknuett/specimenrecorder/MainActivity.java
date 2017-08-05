@@ -1,8 +1,12 @@
 package com.daknuett.specimenrecorder;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
    
@@ -18,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
   
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daknuett.specimenrecorder.listeners.OnSettingsClickedListener;
 
@@ -27,6 +32,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST_WES_CODE = 0xdeadbeef;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private OnSettingsClickedListener onSettingsClickedListener;
+
+    private File storagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,25 +79,42 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-        File settingsFilePath = Environment.getExternalStorageDirectory();
-        String settingsFileName = settingsFilePath.getAbsolutePath() + "/" + getString(R.string.path);
-        settingsFilePath = new File(settingsFileName);
+        if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(getApplicationContext(),
+                    "This application requires access to the external storage.", Toast.LENGTH_LONG).show();
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSION_REQUEST_WES_CODE);
+        }
+
+
+        storagePath = new File(Environment.getExternalStorageDirectory(), "specimenrecorder");
+        String settingsFileName = storagePath.getAbsolutePath();
+
+
+        File settingsFilePath = new File(settingsFileName);
 
         if(!settingsFilePath.exists())
         {
             System.out.println(settingsFilePath.mkdirs());
         }
 
-        try {
-            System.err.println(Environment.getExternalStorageDirectory());
-            new File(Environment.getExternalStorageDirectory() + "/test").createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         settingsFileName = settingsFilePath.getAbsolutePath() + "/" + getString(R.string.settings_filename);
 
-        onSettingsClickedListener = new OnSettingsClickedListener(this, settingsFileName);
+        File dataPath = new File(storagePath, getString(R.string.data_path));
+        if(!dataPath.exists())
+        {
+            dataPath.mkdirs();
+        }
+
+        onSettingsClickedListener = new OnSettingsClickedListener(this,
+                settingsFileName,
+                dataPath.getAbsolutePath() );
 
 
 
@@ -98,6 +123,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+    private boolean checkAndCreateStorage()
+    {
+        if(storagePath.exists())
+        {
+            return true;
+        }
+        return storagePath.mkdirs();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+        String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_WES_CODE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkAndCreateStorage();
+                }
+                else {
+                    this.finish();
+                    System.exit(1);
+                }
+        }
+    }
+
+
+
 
 
     @Override

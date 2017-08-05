@@ -6,4 +6,5 @@
     <string name="document_postfix">json</string>
     <string name="settings_filename">settings.json</string>
     <string name="settings_path">settings/</string>
+    <string name="data_path">data</string>
 </resources>

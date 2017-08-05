@@ -131,7 +131,7 @@ public class SpeciesRecord {
 
     public static SpeciesRecord fromJSONDocument(JSONDocument document) throws JSONMismatchException {
         Map data = document.getData();
-        if(!data.containsKey("__type__") || data.get("__type__") != "speciesrecord")
+        if(!data.containsKey("__type__") || !data.get("__type__").equals("speciesrecord"))
         {
             throw new JSONMismatchException();
         }

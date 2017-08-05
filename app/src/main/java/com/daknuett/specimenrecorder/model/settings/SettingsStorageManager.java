@@ -58,6 +58,7 @@ public class SettingsStorageManager {
         try {
             stream = new FileInputStream(filename);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             throw new FirstRunException();
         }
         JSONDocumentBase base = JSONDocumentBase.load(stream);
@@ -80,6 +81,8 @@ public class SettingsStorageManager {
                 speciesSettings = SpeciesSettings.fromJSONDocument(document);
                 break;
             } catch (JSONMismatchException e) {
+                e.printStackTrace();
+                System.err.println(document);
                 // pass
             }
         }

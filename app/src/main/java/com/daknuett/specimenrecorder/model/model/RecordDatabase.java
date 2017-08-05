@@ -43,7 +43,7 @@ public class RecordDatabase {
 
     public static RecordDatabase load(String prefix)
     {
-        File file = new File(prefix + "/meta.json");
+        File file = new File(prefix , "meta.json");
         InputStream stream;
         try {
              stream = new FileInputStream(file);
@@ -66,7 +66,7 @@ public class RecordDatabase {
     }
 
     public void dump() throws IOException {
-        File file = new File(prefix + "/meta.json");
+        File file = new File(prefix , "meta.json");
         OutputStream stream = new FileOutputStream(file);
 
         Map<String, Object> data = new HashMap<String, Object>();
@@ -81,7 +81,7 @@ public class RecordDatabase {
     }
 
     public void addRecord(LocationRecord record) throws IOException {
-        File file = new File(prefix + "/" + filename + "." + currentFileNo + ".json");
+        File file = new File(prefix , filename + "/" + currentFileNo + ".json");
         if(!file.exists())
         {
             OutputStream stream = new FileOutputStream(file);

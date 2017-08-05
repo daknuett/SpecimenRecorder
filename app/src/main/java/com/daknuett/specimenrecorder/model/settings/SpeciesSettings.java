@@ -36,7 +36,8 @@ public class SpeciesSettings {
 
     public static SpeciesSettings fromJSONDocument(JSONDocument document) throws JSONMismatchException {
         Map data = document.getData();
-        if(!data.containsKey("__type__") || data.get("__type__") == "speciessettings")
+        System.err.println("[speciesSettings]" +  data);
+        if(!data.containsKey("__type__") || !data.get("__type__").equals("speciessettings"))
         {
             throw new JSONMismatchException();
         }

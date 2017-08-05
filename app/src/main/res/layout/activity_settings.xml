@@ -13,23 +13,120 @@
         android:columnCount="2"
         android:rowCount="6">
 
+
+        <TextView
+            android:text="locationSettings.radius"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="@dimen/text_margin"/>
+
+
+        <EditText
+            android:id="@+id/location_radius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="0"
+            android:inputType="numberDecimal"
+            />
+
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
+            android:layout_margin="@dimen/text_margin"
             android:layout_row="1"
-            android:text="locationSettings.radius">
+            android:text="locationSettings.useGPS"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/location_useGPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="1"
+            android:text="useGPS"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="2"
+            android:text="locationSettings.country"/>
+
+
+        <EditText
+            android:id="@+id/location_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="2"
+            android:inputType="text"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="3"
+            android:text="speciesSettings.author">
 
         </android.support.v7.widget.AppCompatTextView>
 
         <EditText
-            android:id="@+id/location_radius"
+            android:id="@+id/species_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_column="1"
-            android:layout_row="1"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="3"
+            android:inputType="text"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="4"
+            android:text="speciesSettings.locationURI"/>
+
+        <Spinner
+            android:id="@+id/species_locationURI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_row="4"
+            ></Spinner>
+
+        <android.support.v7.widget.AppCompatTextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:inputType="numberDecimal"
+            android:layout_margin="@dimen/text_margin"
+            android:text="speciesSettings.useTimestamp"
+            android:layout_row="5"
+            android:layout_column="0"
             />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/species_useTimestamp"
+            android:layout_column="1"
+            android:layout_row="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="useTimestamp"
+            />
+
+
 
 
     </GridLayout>

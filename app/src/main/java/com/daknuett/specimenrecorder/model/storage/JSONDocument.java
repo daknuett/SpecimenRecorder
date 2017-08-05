@@ -27,7 +27,7 @@ public class JSONDocument {
         writer.beginObject();
         for (String key: data.keySet())
         {
-            System.out.println("Writing " + key + ": " + data.get(key));
+            System.err.println("writing: " + key + " :: " + data.get(key));
             JSONWriteHelper.writeObject(writer, key, data.get(key));
         }
         writer.endObject();
@@ -37,7 +37,7 @@ public class JSONDocument {
     public static JSONDocument readJSON(JsonReader reader) throws IOException {
 
         Map<String, Object> data = new HashMap<String, Object>();
-        JSONDocument result = new JSONDocument(data);
+
         reader.beginObject();
 
 
@@ -49,10 +49,18 @@ public class JSONDocument {
             token = reader.peek();
         }
         reader.endObject();
-        return  result;
+
+        return new JSONDocument(data);
     }
     public Map getData()
     {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "JSONDocument{" +
+                "data=" + data +
+                '}';
     }
 }

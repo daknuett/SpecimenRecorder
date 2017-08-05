@@ -37,7 +37,7 @@ public class LocationSettings {
     public static LocationSettings fromJSONDocument(JSONDocument document) throws JSONMismatchException {
         Map data = document.getData();
 
-        if(!data.containsKey("__type__") || data.get("__type__") == "locationsettings")
+        if(!data.containsKey("__type__") || !data.get("__type__").equals("locationsettings"))
         {
             throw new JSONMismatchException();
         }
