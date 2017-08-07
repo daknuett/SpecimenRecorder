@@ -81,7 +81,7 @@ public class RecordDatabase {
     }
 
     public void addRecord(LocationRecord record) throws IOException {
-        File file = new File(prefix , filename + "/" + currentFileNo + ".json");
+        File file = new File(prefix , filename + "." + currentFileNo + ".json");
         if(!file.exists())
         {
             OutputStream stream = new FileOutputStream(file);

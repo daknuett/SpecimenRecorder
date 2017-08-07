@@ -32,7 +32,6 @@ class JSONReadHelper {
     @Nullable
     public static Object readObject(JsonReader reader) throws IOException {
         JsonToken token = reader.peek();
-        System.err.println(token);
         if(token == JsonToken.BEGIN_OBJECT)
         {
             return JSONDocument.readJSON(reader);

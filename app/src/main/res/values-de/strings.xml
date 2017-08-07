@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_location_position">Position</string>
+    <string name="first_run">Sie scheinen dieses Programm zum ersten mal zu benutzen. Überprüfen Sie die Einstellungen</string>
+    <string name="new_location_autogenerate_identifier">Automatisch Erzeugen</string>
+    <string name="new_location_usegps">GPS benutzen</string>
+    <string name="new_location_csv">durch Komma getrennt</string>
+    <string name="new_location_take_image">Bild aufnehmen</string>
+    <string name="new_location_take_picture">Bild Aufnehmen</string>
+    <string name="new_location_doit">Ort Hinzufügen</string>
+    <string name="new_location_latitude_hint">Breitengrad</string>
+    <string name="new_location_longitude_hint">Längengrad</string>
+    <string name="new_location_name_hint">Name</string>
+    <string name="new_location_description_hint">Beschreibung</string>
+    <string name="new_location_address_hint">Adresse</string>
+    <string name="gps_is_required">Diese Funktion benötigt GPS Ortsbestimmung.</string>
+    <string name="failed_to_capture_image">Failed to Capture Image</string>
+    <string name="latitude_required">Latitude is required.</string>
+    <string name="longitude_required">Longitude is required</string>
+    <string name="failed_to_store">Failed to store data.</string>
+    <string name="select_elements">Elemente Auswählen</string>
+    <string name="modify_element">Element Bearbeiten</string>
+    <string name="stored_ok">Sucessfully stored the data.</string>
+</resources>

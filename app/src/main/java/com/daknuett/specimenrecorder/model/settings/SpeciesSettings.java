@@ -47,4 +47,13 @@ public class SpeciesSettings {
                 (boolean) data.get("useTimestamp")
         );
     }
+
+    @Override
+    public String toString() {
+        return "SpeciesSettings{" +
+                "author='" + author + '\'' +
+                ", locationURI='" + locationURI + '\'' +
+                ", useTimestamp=" + useTimestamp +
+                '}';
+    }
 }

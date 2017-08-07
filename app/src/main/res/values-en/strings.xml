@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_location_position">Position</string>
+    <string name="new_location_autogenerate_identifier">Autogenerate</string>
+    <string name="new_location_csv">comma-seperated</string>
+    <string name="new_location_take_image">Take Picture</string>
+    <string name="new_location_take_picture">Take Picture</string>
+    <string name="new_location_doit">Add New Location</string>
+    <string name="new_location_latitude_hint">Latitude</string>
+    <string name="new_location_longitude_hint">Longitude</string>
+    <string name="new_location_name_hint">Name</string>
+    <string name="new_location_description_hint">Description</string>
+    <string name="new_location_address_hint">Address</string>
+    <string name="gps_is_required">This feature requires GPS location services.</string>
+    <string name="failed_to_capture_image">Failed to Capture Image</string>
+    <string name="latitude_required">Latitude is required.</string>
+    <string name="longitude_required">Longitude is required</string>
+    <string name="failed_to_store">Failed to store data.</string>
+    <string name="select_elements">Select Elements</string>
+    <string name="modify_element">Modify Item</string>
+    <string name="stored_ok">Sucessfully stored the data.</string>
+</resources>

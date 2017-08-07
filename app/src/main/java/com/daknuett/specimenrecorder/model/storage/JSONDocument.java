@@ -27,7 +27,6 @@ public class JSONDocument {
         writer.beginObject();
         for (String key: data.keySet())
         {
-            System.err.println("writing: " + key + " :: " + data.get(key));
             JSONWriteHelper.writeObject(writer, key, data.get(key));
         }
         writer.endObject();

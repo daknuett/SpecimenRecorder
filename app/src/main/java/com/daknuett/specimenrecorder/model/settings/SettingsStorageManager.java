@@ -81,8 +81,6 @@ public class SettingsStorageManager {
                 speciesSettings = SpeciesSettings.fromJSONDocument(document);
                 break;
             } catch (JSONMismatchException e) {
-                e.printStackTrace();
-                System.err.println(document);
                 // pass
             }
         }
@@ -92,5 +90,14 @@ public class SettingsStorageManager {
         }
 
         return new SettingsStorageManager(locationSettings, speciesSettings, filename);
+    }
+
+    @Override
+    public String toString() {
+        return "SettingsStorageManager{" +
+                "locationSettings=" + locationSettings +
+                ", speciesSettings=" + speciesSettings +
+                ", filename='" + filename + '\'' +
+                '}';
     }
 }

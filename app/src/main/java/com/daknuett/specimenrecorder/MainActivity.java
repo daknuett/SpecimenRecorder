@@ -24,6 +24,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daknuett.specimenrecorder.fragments.LocationRecordListFragment;
+import com.daknuett.specimenrecorder.fragments.MyFragment;
+import com.daknuett.specimenrecorder.fragments.NewLocationRecordFragment;
+import com.daknuett.specimenrecorder.fragments.NewSpecimenRecordFragment;
+import com.daknuett.specimenrecorder.fragments.SpecimenRecordListFragment;
 import com.daknuett.specimenrecorder.listeners.OnSettingsClickedListener;
 
 import java.io.File;
@@ -61,22 +66,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "this will take a photo", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
 
 
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -95,31 +85,40 @@ public class MainActivity extends AppCompatActivity {
         String settingsFileName = storagePath.getAbsolutePath();
 
 
+
         File settingsFilePath = new File(settingsFileName);
 
         if(!settingsFilePath.exists())
         {
             System.out.println(settingsFilePath.mkdirs());
         }
-
-
-
-        settingsFileName = settingsFilePath.getAbsolutePath() + "/" + getString(R.string.settings_filename);
-
+        File imagePath = new File(storagePath, getString(R.string.image_prefix));
+        if(!imagePath.exists())
+            imagePath.mkdirs();
         File dataPath = new File(storagePath, getString(R.string.data_path));
         if(!dataPath.exists())
         {
             dataPath.mkdirs();
         }
 
+
+
+        settingsFileName = settingsFilePath.getAbsolutePath() + "/" + getString(R.string.settings_filename);
+
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
+                new File(storagePath, getString(R.string.data_path)).getAbsolutePath(),
+                settingsFileName);
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+
         onSettingsClickedListener = new OnSettingsClickedListener(this,
                 settingsFileName,
                 dataPath.getAbsolutePath() );
-
-
-
-
-
 
 
     }
@@ -187,33 +186,40 @@ public class MainActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        private String dataPath;
+        private String settingsFilename;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm, String dataPath, String settingsFilename)
+        {
             super(fm);
+            this.dataPath = dataPath;
+            this.settingsFilename = settingsFilename;
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position + 1, dataPath, settingsFilename);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Add Specimen Record";
                 case 1:
-                    return "SECTION 2";
+                    return "Specimen Records";
                 case 2:
-                    return "SECTION 3";
+                    return "Add Location Record";
+                case 3:
+                    return "Location Records";
             }
             return null;
         }
@@ -229,14 +235,33 @@ public class MainActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static Fragment newInstance(int sectionNumber, String dataPath, String settingsFilename) {
+            Fragment fragment = null;
+            switch (sectionNumber)
+            {
+                case 1:
+                    fragment = new NewSpecimenRecordFragment();
+                    break;
+                case 2:
+                    fragment = new SpecimenRecordListFragment();
+                    break;
+                case 3:
+                    fragment = new NewLocationRecordFragment();
+                    break;
+                case 4:
+                    fragment = new LocationRecordListFragment();
+                    break;
+            }
+
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(MyFragment.ARG_DATA_PATH, dataPath);
+            args.putString(MyFragment.ARG_SETTINGS_FILENAME, settingsFilename);
             fragment.setArguments(args);
             return fragment;
         }
@@ -244,13 +269,6 @@ public class MainActivity extends AppCompatActivity {
         public PlaceholderFragment() {
         }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
+
     }
 }

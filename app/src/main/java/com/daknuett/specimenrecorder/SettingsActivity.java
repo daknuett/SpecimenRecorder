@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
         {
             storageManager = new SettingsStorageManager(settingsFilename);
             Toast.makeText(getApplicationContext(),
-                    "This appears to be your first run. Make sure to check all the settings.",
+                    getString(R.string.first_run),
                     Toast.LENGTH_LONG).show();
         }
 
@@ -80,11 +80,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         RecordDatabase recordDatabase = RecordDatabase.load(dataPath);
 
-
         try {
             List<CharSequence> locationURIList = new LinkedList<CharSequence>();
             for (LocationRecord record :
                     recordDatabase.getAllLocationRecords()) {
+                System.err.println(record);
                 locationURIList.add(record.getIdentifier());
             }
             ArrayAdapter<CharSequence> spinnerAdapter = new ArrayAdapter<>(this,
@@ -92,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
                     locationURIList);
             species_locationURI.setAdapter(spinnerAdapter);
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
 

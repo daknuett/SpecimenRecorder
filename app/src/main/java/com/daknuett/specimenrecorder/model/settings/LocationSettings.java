@@ -48,4 +48,13 @@ public class LocationSettings {
                 (String) data.get("country")
         );
     }
+
+    @Override
+    public String toString() {
+        return "LocationSettings{" +
+                "radius=" + radius +
+                ", useGPS=" + useGPS +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }
