@@ -1,4 +1,4 @@
-package com.daknuett.specimenrecorder.listeners.newLocationRecord;
+package com.daknuett.specimenrecorder.listeners.newSpecimenRecord;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,7 +27,7 @@ import java.util.Date;
  * Created by daniel on 07.08.17.
  */
 
-public class NewLocationTakePictureButtonListener
+public class NewSpecimenTakePictureButtonListener
         implements View.OnClickListener
 
 {
@@ -34,9 +35,9 @@ public class NewLocationTakePictureButtonListener
     private TextView imageURITextView;
     private ImageView imageView;
     private Activity activity;
-    private NewLocationRecordFragment fragment;
+    private Fragment fragment;
 
-    public NewLocationTakePictureButtonListener(TextView imageURITextView, ImageView imageView, Activity activity, NewLocationRecordFragment fragment) {
+    public NewSpecimenTakePictureButtonListener(TextView imageURITextView, ImageView imageView, Activity activity, Fragment fragment) {
         this.imageURITextView = imageURITextView;
         this.imageView = imageView;
         this.activity = activity;

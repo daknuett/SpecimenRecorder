@@ -5,7 +5,8 @@ package com.daknuett.specimenrecorder.model.intents;
  */
 
 public class RequestCodes {
-    public static final int REQUEST = 0x20000,
+    public static final int REQUEST = 0x2000,
         REQUEST_CAPTURE_PHOTO = REQUEST | 0x01,
         REQUEST_CAPTURE_SMALL_PHOTO = REQUEST | 0x02;
+
 }

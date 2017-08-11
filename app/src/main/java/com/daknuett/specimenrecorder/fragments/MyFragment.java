@@ -18,6 +18,7 @@ import java.io.IOException;
 public class MyFragment
 extends Fragment
 {
+    public static final String ARG_STORAGE_PATH = "storage_path";
     protected RecordDatabase recordDatabase;
     protected SettingsStorageManager settingsStorageManager;
     public static final String ARG_DATA_PATH = "data_path";
@@ -26,6 +27,9 @@ extends Fragment
     protected void loadStorage(Bundle savedInstanceState)
     {
         recordDatabase = RecordDatabase.load(savedInstanceState.getString(ARG_DATA_PATH));
+
+        System.out.println(getClass().getName() + " : " + recordDatabase);
+
         String settingsFilename = savedInstanceState.getString(ARG_SETTINGS_FILENAME);
         try {
             settingsStorageManager = SettingsStorageManager.load(settingsFilename);

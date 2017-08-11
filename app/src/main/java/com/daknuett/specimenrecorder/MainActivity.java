@@ -3,25 +3,18 @@ package com.daknuett.specimenrecorder;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-   
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-  
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.daknuett.specimenrecorder.fragments.LocationRecordListFragment;
@@ -32,12 +25,11 @@ import com.daknuett.specimenrecorder.fragments.SpecimenRecordListFragment;
 import com.daknuett.specimenrecorder.listeners.OnSettingsClickedListener;
 
 import java.io.File;
-import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int PERMISSION_REQUEST_WES_CODE = 0xdeadbeef;
+    private static final int PERMISSION_REQUEST_WES_CODE = 0x0000beef;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -197,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1, dataPath, settingsFilename);
+            return PlaceholderFragment.newInstance(position + 1, dataPath, settingsFilename, storagePath.getPath());
         }
 
         @Override
@@ -228,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends android.support.v4.app.Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -240,8 +232,11 @@ public class MainActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static Fragment newInstance(int sectionNumber, String dataPath, String settingsFilename) {
-            Fragment fragment = null;
+        public static android.support.v4.app.Fragment newInstance(int sectionNumber,
+                                                                  String dataPath,
+                                                                  String settingsFilename,
+                                                                  String storagePath) {
+            android.support.v4.app.Fragment fragment = null;
             switch (sectionNumber)
             {
                 case 1:
@@ -262,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString(MyFragment.ARG_DATA_PATH, dataPath);
             args.putString(MyFragment.ARG_SETTINGS_FILENAME, settingsFilename);
+            args.putString(MyFragment.ARG_STORAGE_PATH, storagePath);
             fragment.setArguments(args);
             return fragment;
         }

@@ -71,6 +71,37 @@ public class LocationRecord {
             throw new JSONMismatchException();
         }
 
+        List<String> tagList = (List<String>) data.get("tags");
+        String[] tagArray;
+        if(tagList == null || tagList.size() == 0)
+        {
+            tagArray = new String[0];
+        }
+        else {
+            tagArray = new String[tagList.size()];
+            for (int i = 0; i < tagArray.length; i++) {
+                tagArray[i] = tagList.get(i);
+
+            }
+        }
+
+        List<List<Double>> colorMapList = (List<List<Double>>) data.get("colorMap");
+        Double[][] colorMapArray;
+        if(colorMapList == null || colorMapList.size() == 0)
+        {
+            colorMapArray = new Double[0][0];
+        }
+        else
+        {
+            colorMapArray = new Double[colorMapList.size()][colorMapList.get(0).size()];
+            for (int i = 0; i < colorMapArray.length; i++) {
+                for (int j = 0; j < colorMapArray[i].length; j++) {
+                    colorMapArray[i][j] = colorMapList.get(i).get(j);
+                }
+            }
+        }
+
+
         return new LocationRecord(
                 (double) data.get("latitude"),
                 (double) data.get("longitude"),
@@ -79,10 +110,10 @@ public class LocationRecord {
                 (String) data.get("description"),
                 (String) data.get("identifier"),
                 (String) data.get("country"),
-                (String[])((LinkedList)data.get("tags")).toArray(),
+                tagArray,
                 (String) data.get("address"),
                 (String) data.get("imageURI"),
-                (Double[][])((LinkedList)data.get("colorMap")).toArray()
+                colorMapArray
         );
     }
 
@@ -104,5 +135,46 @@ public class LocationRecord {
 
     public String getIdentifier() {
         return identifier;
+    }
+
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public Double[][] getColorMap() {
+        return colorMap;
     }
 }

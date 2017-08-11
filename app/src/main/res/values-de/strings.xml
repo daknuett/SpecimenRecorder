@@ -20,5 +20,12 @@
     <string name="failed_to_store">Failed to store data.</string>
     <string name="select_elements">Elemente Auswählen</string>
     <string name="modify_element">Element Bearbeiten</string>
-    <string name="stored_ok">Sucessfully stored the data.</string>
+    <string name="stored_ok">Speichern erfolgreich.</string>
+    <string name="location_id">ID</string>
+    <string name="location_latitude">Breite</string>
+    <string name="location_longitude">Länge</string>
+    <string name="save_location">Speichern</string>
+    <string name="add_specimen">Hinzufügen</string>
+    <string name="add_gps_location">Aktuelle GPS Koordinaten hinzufügen</string>
+    <string name="identifier_required">Identifier wird benötigt.</string>
 </resources>

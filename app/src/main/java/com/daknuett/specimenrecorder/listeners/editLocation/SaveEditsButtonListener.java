@@ -1,12 +1,12 @@
-package com.daknuett.specimenrecorder.listeners.newLocationRecord;
+package com.daknuett.specimenrecorder.listeners.editLocation;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,47 +18,45 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by daniel on 07.08.17.
+ * Created by daniel on 10.08.17.
  */
 
-public class NewLocationCreateButtonListener
-        implements View.OnClickListener {
-
+public class SaveEditsButtonListener
+implements View.OnClickListener
+{
     private RecordDatabase recordDatabase;
-    private EditText nameEdit;
-    private EditText descriptionEdit;
-    private EditText longitudeEdit;
-    private EditText latitudeEdit;
-    private EditText radiusEdit;
-    private EditText countryEdit;
-    private EditText identifierEdit;
-    private EditText tagsEdit;
-    private EditText addressEdit;
-    private TextView imageURIView;
+    private TextView locationIdentifier;
+    private EditText locationLatitude;
+    private EditText locationLongitude;
+    private EditText locationAddress;
+    private EditText locationName;
+    private EditText locationRadius;
+    private EditText locationTags;
+    private EditText locationDescription;
+    private TextView locationImageURI;
+    private ImageView locationImagePreview;
     private Activity activity;
-    private Fragment fragment;
 
-    public NewLocationCreateButtonListener(RecordDatabase recordDatabase, EditText nameEdit, EditText descriptionEdit, EditText longitudeEdit, EditText latitudeEdit, EditText radiusEdit, EditText countryEdit, EditText identifierEdit, EditText tagsEdit, EditText addressEdit, TextView imageURIView, Activity activity, Fragment fragment) {
+    public SaveEditsButtonListener(RecordDatabase recordDatabase, TextView locationIdentifier, EditText locationLatitude, EditText locationLongitude, EditText locationAddress, EditText locationName, EditText locationRadius, EditText locationTags, EditText locationDescription, TextView locationImageURI, ImageView locationImagePreview, Activity activity) {
         this.recordDatabase = recordDatabase;
-        this.nameEdit = nameEdit;
-        this.descriptionEdit = descriptionEdit;
-        this.longitudeEdit = longitudeEdit;
-        this.latitudeEdit = latitudeEdit;
-        this.radiusEdit = radiusEdit;
-        this.countryEdit = countryEdit;
-        this.identifierEdit = identifierEdit;
-        this.tagsEdit = tagsEdit;
-        this.addressEdit = addressEdit;
-        this.imageURIView = imageURIView;
+        this.locationIdentifier = locationIdentifier;
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
+        this.locationAddress = locationAddress;
+        this.locationName = locationName;
+        this.locationRadius = locationRadius;
+        this.locationTags = locationTags;
+        this.locationDescription = locationDescription;
+        this.locationImageURI = locationImageURI;
+        this.locationImagePreview = locationImagePreview;
         this.activity = activity;
-        this.fragment = fragment;
     }
 
     @Override
     public void onClick(View v) {
         File storageDir = new File(Environment.getExternalStorageDirectory(), activity.getString(R.string.path));
         storageDir = new File(storageDir, activity.getString(R.string.image_prefix));
-        File image = new File(storageDir, imageURIView.getText().toString());
+        File image = new File(storageDir, locationImageURI.getText().toString());
         Double[][] colorMap;
         if(image.exists()) {
             Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
@@ -75,9 +73,8 @@ public class NewLocationCreateButtonListener
         {
             colorMap = new Double[0][0];
         }
-
-        String latitude = latitudeEdit.getText().toString(),
-                longitude = longitudeEdit.getText().toString();
+        String latitude = locationLatitude.getText().toString(),
+                longitude = locationLongitude.getText().toString();
         if(latitude.equals(""))
         {
             Toast.makeText(activity.getApplicationContext(),
@@ -93,12 +90,12 @@ public class NewLocationCreateButtonListener
             return;
         }
 
-        LocationRecord locationRecord = new LocationRecord(
+       /* LocationRecord locationRecord = new LocationRecord(
                 Double.parseDouble(latitude),
                 Double.parseDouble(longitude),
-                Double.parseDouble(radiusEdit.getText().toString()),
-                nameEdit.getText().toString(),
-                descriptionEdit.getText().toString(),
+                Double.parseDouble(locationRadius.getText().toString()),
+                locationName.getText().toString(),
+                locat.getText().toString(),
                 identifierEdit.getText().toString(),
                 countryEdit.getText().toString(),
                 tagsEdit.getText().toString().split(","),
@@ -113,7 +110,7 @@ public class NewLocationCreateButtonListener
             Toast.makeText(activity.getApplicationContext(),
                     activity.getString(R.string.failed_to_store),
                     Toast.LENGTH_SHORT
-                    ).show();
+            ).show();
             return;
         }
 
@@ -125,6 +122,6 @@ public class NewLocationCreateButtonListener
                 activity.getString(R.string.stored_ok),
                 Toast.LENGTH_SHORT
         ).show();
-
+*/
     }
 }

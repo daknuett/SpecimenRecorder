@@ -1,6 +1,7 @@
 package com.daknuett.specimenrecorder.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,5 +21,13 @@ extends MyFragment
         View rootView = inflater.inflate(R.layout.fragment_specimenrecordlist, container, false);
         loadStorage(getArguments());
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+
     }
 }

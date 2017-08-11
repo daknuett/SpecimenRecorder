@@ -37,17 +37,26 @@ public class RecordDatabase {
         this.filename = filename;
         this.prefix = prefix;
         this.totalFiles = totalFiles;
-        this.currentFileNo = totalFiles;
+        if(totalFiles == 0)
+        {
+            this.currentFileNo = 0;
+        }
+        else
+        {
+            this.currentFileNo = totalFiles - 1;
+        }
 
     }
 
     public static RecordDatabase load(String prefix)
     {
         File file = new File(prefix , "meta.json");
+        System.out.println( "RecordDatabase : " + file.getAbsolutePath() + " : " + file.exists());
         InputStream stream;
         try {
              stream = new FileInputStream(file);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             return new RecordDatabase("db", prefix, 0);
         }
 
@@ -57,9 +66,10 @@ public class RecordDatabase {
             Map data = document.getData();
             return new RecordDatabase((String) data.get("filename"),
                     (String) data.get("prefix"),
-                    (int) data.get("totalFiles")
+                    ((Double) data.get("totalFiles")).intValue()
                     );
         } catch (Exception e) {
+            e.printStackTrace();
             return new RecordDatabase("db", prefix, 0);
         }
 
@@ -84,21 +94,22 @@ public class RecordDatabase {
         File file = new File(prefix , filename + "." + currentFileNo + ".json");
         if(!file.exists())
         {
+            totalFiles++;
             OutputStream stream = new FileOutputStream(file);
             JSONDocumentBase db = new JSONDocumentBase();
             db.addDocument(record.toJSONDocument());
             db.dump(stream);
             stream.close();
+            dump();
             return;
 
         }
 
-        if(file.getTotalSpace() > 8*1000)
+        if(file.length() > 8*1000)
         {
             currentFileNo++;
-            totalFiles++;
-            dump();
             addRecord(record);
+            return;
         }
 
         InputStream streamIn = new FileInputStream(file);
@@ -114,20 +125,22 @@ public class RecordDatabase {
         File file = new File(prefix + "/" + filename + "." + currentFileNo + ".json");
         if(!file.exists())
         {
+            totalFiles++;
             OutputStream stream = new FileOutputStream(file);
             JSONDocumentBase db = new JSONDocumentBase();
             db.addDocument(record.toJSONDocument());
             db.dump(stream);
             stream.close();
+            dump();
             return;
 
         }
 
-        if(file.getTotalSpace() > 8*1000)
+        if(file.length() > 8*1000)
         {
             currentFileNo++;
-            dump();
             addRecord(record);
+            return;
         }
 
         InputStream streamIn = new FileInputStream(file);
@@ -169,6 +182,7 @@ public class RecordDatabase {
         for (int i = 0; i < totalFiles; i++)
         {
             File file = new File(prefix + "/" + filename + "." + i + ".json");
+
             InputStream streamIn = new FileInputStream(file);
             JSONDocumentBase db = JSONDocumentBase.load(streamIn);
             streamIn.close();
@@ -226,5 +240,53 @@ public class RecordDatabase {
         out.putNextEntry(new ZipEntry(filename + ".json"));
         db.dump(out);
         out.close();
+    }
+
+    @Override
+    public String toString() {
+        return "RecordDatabase{" +
+                "prefix='" + prefix + '\'' +
+                ", filename='" + filename + '\'' +
+                ", currentFileNo=" + currentFileNo +
+                ", totalFiles=" + totalFiles +
+                '}';
+    }
+
+    public void updateRecord(LocationRecord record) throws IOException {
+        boolean found = false;
+        for (int i = 0; i < totalFiles; i++)
+        {
+            File file = new File(prefix + "/" + filename + "." + i + ".json");
+
+            InputStream streamIn = new FileInputStream(file);
+            JSONDocumentBase db = JSONDocumentBase.load(streamIn);
+            streamIn.close();
+
+            JSONDocumentBase update = new JSONDocumentBase();
+            LocationRecord old;
+
+
+            for (JSONDocument document :
+                    db.getDocuments()) {
+                try {
+                    old = LocationRecord.fromJSONDocument(document);
+                    if (old.getIdentifier().equals(record.getIdentifier()))
+                    {
+                        update.addDocument(record.toJSONDocument());
+                        found = true;
+                    }
+                    else
+                    {
+                        update.addDocument(document);
+                    }
+                } catch (JSONMismatchException e) {
+                    update.addDocument(document);
+                }
+            }
+            if(found)
+            {
+                break;
+            }
+        }
     }
 }

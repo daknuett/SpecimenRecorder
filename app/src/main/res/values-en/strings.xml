@@ -19,4 +19,11 @@
     <string name="select_elements">Select Elements</string>
     <string name="modify_element">Modify Item</string>
     <string name="stored_ok">Sucessfully stored the data.</string>
+    <string name="location_id">ID</string>
+    <string name="location_latitude">Latitude</string>
+    <string name="location_longitude">Longitude</string>
+    <string name="save_location">Save</string>
+    <string name="add_specimen">Add Record</string>
+    <string name="add_gps_location">Add current GPS location</string>
+    <string name="identifier_required">Identifier is required.</string>
 </resources>

@@ -33,6 +33,7 @@ public class SpeciesRecord {
                     year,
                     hour,
                     minute;
+    private double latitude, longitude;
 
     public SpeciesRecord(String author, String genus, String species, String subspecies, String nickname, String imageURI, String locationURI, String identifier, double timestamp, double day, double month, double year, double hour, double minute) {
         this.author = author;
@@ -105,6 +106,46 @@ public class SpeciesRecord {
         this.minute = date.getMinutes();
     }
 
+    public SpeciesRecord(String author, String genus, String species, String subspecies, String nickname, String imageURI, String locationURI, String identifier, double timestamp, double latitude, double longitude) {
+        this.author = author;
+        this.genus = genus;
+        this.species = species;
+        this.subspecies = subspecies;
+        this.nickname = nickname;
+        this.imageURI = imageURI;
+        this.locationURI = locationURI;
+        this.identifier = identifier;
+        this.timestamp = timestamp;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        Date date = new Date((long) timestamp);
+
+        this.day = date.getDay();
+        this.month = date.getMonth();
+        this.year = date.getYear();
+        this.hour = date.getHours();
+        this.minute = date.getMinutes();
+    }
+
+    public SpeciesRecord(String author, String genus, String species, String subspecies, String nickname, String imageURI, String locationURI, String identifier, double timestamp, double day, double month, double year, double hour, double minute, double latitude, double longitude) {
+        this.author = author;
+        this.genus = genus;
+        this.species = species;
+        this.subspecies = subspecies;
+        this.nickname = nickname;
+        this.imageURI = imageURI;
+        this.locationURI = locationURI;
+        this.identifier = identifier;
+        this.timestamp = timestamp;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.minute = minute;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public JSONDocument toJSONDocument()
     {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -125,6 +166,8 @@ public class SpeciesRecord {
         data.put("year", year);
         data.put("hour", hour);
         data.put("minute", minute);
+        data.put("latitude", latitude);
+        data.put("longitude", longitude);
 
         return new JSONDocument(data);
     }
@@ -150,7 +193,9 @@ public class SpeciesRecord {
                 (double) data.get("month"),
                 (double) data.get("year"),
                 (double) data.get("hour"),
-                (double) data.get("minute")
+                (double) data.get("minute"),
+                (double) data.get("latitude"),
+                (double) data.get("longitude")
         );
     }
 
@@ -224,5 +269,13 @@ public class SpeciesRecord {
 
     public double getMinute() {
         return minute;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }
