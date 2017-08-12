@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.daknuett.specimenrecorder.listeners.OnSettingsClickedListener;
+import com.daknuett.specimenrecorder.listeners.settings.SpeciesLocationURISpinnerListener;
 import com.daknuett.specimenrecorder.listeners.settings.LocationCountryEditListener;
 import com.daknuett.specimenrecorder.listeners.settings.LocationRadiusEditListener;
 import com.daknuett.specimenrecorder.listeners.settings.LocationUseGPSCheckboxListener;
@@ -94,6 +95,8 @@ public class SettingsActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        species_locationURI.setOnItemSelectedListener(new SpeciesLocationURISpinnerListener(storageManager, this));
 
 
 
