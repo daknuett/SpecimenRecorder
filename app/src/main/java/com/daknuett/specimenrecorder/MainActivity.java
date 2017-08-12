@@ -22,6 +22,7 @@ import com.daknuett.specimenrecorder.fragments.MyFragment;
 import com.daknuett.specimenrecorder.fragments.NewLocationRecordFragment;
 import com.daknuett.specimenrecorder.fragments.NewSpecimenRecordFragment;
 import com.daknuett.specimenrecorder.fragments.SpecimenRecordListFragment;
+import com.daknuett.specimenrecorder.listeners.OnInfoClickedListener;
 import com.daknuett.specimenrecorder.listeners.OnSettingsClickedListener;
 
 import java.io.File;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private OnSettingsClickedListener onSettingsClickedListener;
 
     private File storagePath;
+    private OnInfoClickedListener onInfoClickedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         onSettingsClickedListener = new OnSettingsClickedListener(this,
                 settingsFileName,
                 dataPath.getAbsolutePath() );
-
+        onInfoClickedListener = new OnInfoClickedListener(this);
 
     }
 
@@ -161,10 +163,13 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             onSettingsClickedListener.onMenuItemClick(item);
             return true;
+        }
+        if (id == R.id.action_info)
+        {
+            onInfoClickedListener.onMenuItemClick(item);
         }
 
         return super.onOptionsItemSelected(item);

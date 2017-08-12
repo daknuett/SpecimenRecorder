@@ -36,6 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2"/>
-
+    <!--
+            Without this padding here the ActionBar would
+            shift some of the content below the visible screen.
+            It's kinda hacky but works :-P
+            -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:layout_height="?actionBarSize"/>
 
 </LinearLayout>

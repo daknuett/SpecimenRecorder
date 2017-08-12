@@ -53,8 +53,6 @@ extends MyFragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        System.err.println("INSIDE: onActivityCreated");
-
         activity = getActivity();
 
         ListView locationListView = (ListView) activity.findViewById(R.id.location_list_view);

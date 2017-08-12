@@ -28,4 +28,6 @@
     <string name="add_specimen">Hinzufügen</string>
     <string name="add_gps_location">Aktuelle GPS Koordinaten hinzufügen</string>
     <string name="identifier_required">Identifier wird benötigt.</string>
+    <string name="action_info">Info</string>
+    <string name="title_activity_info">Info</string>
 </resources>

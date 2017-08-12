@@ -6,7 +6,7 @@
     <string name="new_location_position">Position</string>
     <string name="new_location_autogenerate_identifier">Autogenerate</string>
     <string name="new_location_usegps">use GPS</string>
-    <string name="new_location_csv">comma-seperated</string>
+    <string name="new_location_csv">comma-separated</string>
     <string name="new_location_take_image">Take Picture</string>
     <string name="new_location_take_picture">Take Picture</string>
     <string name="new_location_doit">Add New Location</string>
@@ -22,7 +22,7 @@
     <string name="failed_to_store">Failed to store data.</string>
     <string name="select_elements">Select Items</string>
     <string name="modify_element">Modify Item</string>
-    <string name="stored_ok">Sucessfully stored the data.</string>
+    <string name="stored_ok">Successfully stored the data.</string>
     <string name="location_id">ID</string>
     <string name="location_latitude">Latitude</string>
     <string name="location_longitude">Longitude</string>
@@ -30,6 +30,40 @@
     <string name="add_specimen">Add Record</string>
     <string name="add_gps_location">Add current GPS location</string>
     <string name="identifier_required">Identifier is required.</string>
+    <string name="info_text">
+        SpecimenRecorder — Record Specimen In The Field Easily
+        \n******************************************************
+        \n
+        \nThis app is still under development and not really safe
+        \nfor productive usage. The following parts of the app do NOT
+        \nwork yet:
+        \n
+        \n* Store a default location
+        \n* Create specimen records with a non-timestamp date/time
+        \n* Editspecimens/locations
+        \n* Export specimens/locations
+        \n* Delete specimen/location records
+        \n* Clean up the used disk space
+        \n
+        \nThe following parts do work:
+        \n
+        \n* Create specimen records
+        \n* Create location records
+        \n* Link specimen to location
+        \n* Use the current GPS position for specimen and location records
+        \n* Add Images to the records
+        \n
+        \nAll data is stored on the external storage space (usually ``/sdcard``)
+        \nand can be accessed by third party tools.
+        \n
+        \nData
+        \n====
+        \n
+        \nAll records is stored in JSON files. These files will be split if their
+        \nsize increases over 8000 Bytes. The images are stored as JPEG.
+    </string>
+    <string name="action_info">Info</string>
+    <string name="title_activity_info">Info</string>
 
 
 </resources>

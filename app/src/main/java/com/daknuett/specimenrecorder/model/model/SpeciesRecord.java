@@ -7,10 +7,12 @@ import com.daknuett.specimenrecorder.model.storage.JSONDocumentBase;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -66,14 +68,16 @@ public class SpeciesRecord {
         this.hour = hour;
         this.minute = minute;
 
-        String date_str = String.format("%2d-%2d-%04d %2d:%2d",
+        Locale locale = Locale.getDefault();
+
+        String date_str = String.format(locale, "%2d-%2d-%04d %2d:%2d",
                 (int) day,
                 (int) month,
                 (int) year,
                 (int) hour,
                 (int) minute);
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm", locale);
         Date date;
         try {
              date = formatter.parse(date_str);
@@ -97,13 +101,17 @@ public class SpeciesRecord {
         this.identifier = identifier;
         this.timestamp = timestamp;
 
-        Date date = new Date((long) timestamp);
 
-        this.day = date.getDay();
-        this.month = date.getMonth();
-        this.year = date.getYear();
-        this.hour = date.getHours();
-        this.minute = date.getMinutes();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis((long) timestamp * 1000L);
+
+
+
+        this.day = calendar.get(Calendar.DAY_OF_MONTH);
+        this.month = calendar.get(Calendar.MONTH) + 1;
+        this.year = calendar.get(Calendar.YEAR);
+        this.hour = calendar.get(Calendar.HOUR_OF_DAY);
+        this.minute = calendar.get(Calendar.MINUTE);
     }
 
     public SpeciesRecord(String author, String genus, String species, String subspecies, String nickname, String imageURI, String locationURI, String identifier, double timestamp, double latitude, double longitude) {
@@ -118,13 +126,18 @@ public class SpeciesRecord {
         this.timestamp = timestamp;
         this.latitude = latitude;
         this.longitude = longitude;
-        Date date = new Date((long) timestamp);
 
-        this.day = date.getDay();
-        this.month = date.getMonth();
-        this.year = date.getYear();
-        this.hour = date.getHours();
-        this.minute = date.getMinutes();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis((long) timestamp * 1000L);
+
+
+
+        this.day = calendar.get(Calendar.DAY_OF_MONTH);
+        this.month = calendar.get(Calendar.MONTH) + 1;
+        this.year = calendar.get(Calendar.YEAR);
+        this.hour = calendar.get(Calendar.HOUR_OF_DAY);
+        this.minute = calendar.get(Calendar.MINUTE);
     }
 
     public SpeciesRecord(String author, String genus, String species, String subspecies, String nickname, String imageURI, String locationURI, String identifier, double timestamp, double day, double month, double year, double hour, double minute, double latitude, double longitude) {

@@ -2,7 +2,7 @@
 <resources>
     <string name="new_location_position">Position</string>
     <string name="new_location_autogenerate_identifier">Autogenerate</string>
-    <string name="new_location_csv">comma-seperated</string>
+    <string name="new_location_csv">comma-separated</string>
     <string name="new_location_take_image">Take Picture</string>
     <string name="new_location_take_picture">Take Picture</string>
     <string name="new_location_doit">Add New Location</string>
@@ -18,7 +18,7 @@
     <string name="failed_to_store">Failed to store data.</string>
     <string name="select_elements">Select Elements</string>
     <string name="modify_element">Modify Item</string>
-    <string name="stored_ok">Sucessfully stored the data.</string>
+    <string name="stored_ok">Successfully stored the data.</string>
     <string name="location_id">ID</string>
     <string name="location_latitude">Latitude</string>
     <string name="location_longitude">Longitude</string>
@@ -26,4 +26,6 @@
     <string name="add_specimen">Add Record</string>
     <string name="add_gps_location">Add current GPS location</string>
     <string name="identifier_required">Identifier is required.</string>
+    <string name="action_info">Info</string>
+    <string name="title_activity_info">Info</string>
 </resources>
